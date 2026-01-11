@@ -1,0 +1,32 @@
+---
+const nav = [
+  { href: "/", label: "Home" },
+  { href: "/books", label: "Books" },
+  { href: "/blog", label: "Blog" },
+  { href: "/technology", label: "Technology" },
+  { href: "/locations", label: "Locations" },
+  { href: "/author", label: "Author" },
+  { href: "/the-game", label: "The Game" }
+];
+---
+
+<header class="border-b border-neutral-200">
+  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4">
+    <a href="/" class="text-lg font-semibold tracking-tight">THE QUOTIENT SERIES</a>
+
+    <nav class="hidden flex-wrap items-center gap-4 text-sm text-neutral-700 md:flex">
+      {nav.map((item) => (
+        <a class="hover:text-accent" href={item.href}>{item.label}</a>
+      ))}
+    </nav>
+
+    <details class="md:hidden">
+      <summary class="cursor-pointer rounded-lg border border-neutral-200 px-3 py-2 text-sm">Menu</summary>
+      <div class="mt-2 grid gap-2 rounded-xl border border-neutral-200 bg-white p-3 text-sm">
+        {nav.map((item) => (
+          <a class="rounded-lg px-2 py-2 hover:text-accent" href={item.href}>{item.label}</a>
+        ))}
+      </div>
+    </details>
+  </div>
+</header>

@@ -1,0 +1,45 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+
+const { title, description, pubDate, updatedDate, coverImage, tags } = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <article class="mx-auto max-w-3xl">
+    <header class="mb-8">
+      <p class="text-sm text-neutral-600">
+        <time datetime={pubDate?.toISOString()}>
+          {pubDate?.toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" })}
+        </time>
+        {updatedDate ? (
+          <>
+            <span class="mx-2">•</span>
+            <span>Updated </span>
+            <time datetime={updatedDate.toISOString()}>
+              {updatedDate.toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" })}
+            </time>
+          </>
+        ) : null}
+      </p>
+
+      <h1 class="mt-2 text-4xl font-semibold tracking-tight">{title}</h1>
+      {description ? <p class="mt-3 text-lg text-neutral-700">{description}</p> : null}
+
+      {tags?.length ? (
+        <ul class="mt-4 flex flex-wrap gap-2">
+          {tags.map((t) => (
+            <li class="rounded-full bg-neutral-100 px-3 py-1 text-sm text-neutral-700">{t}</li>
+          ))}
+        </ul>
+      ) : null}
+    </header>
+
+    {coverImage ? (
+      <img class="mb-8 w-full rounded-2xl border border-neutral-200" src={coverImage} alt="" loading="lazy" />
+    ) : null}
+
+    <div class="prose prose-neutral max-w-none">
+      <slot />
+    </div>
+  </article>
+</BaseLayout>

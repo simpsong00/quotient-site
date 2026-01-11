@@ -1,0 +1,28 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="The Game">
+  <div class="mx-auto max-w-4xl">
+    <h1 class="text-4xl font-semibold tracking-tight">Quotient, The Game</h1>
+
+    <p class="mt-4 text-neutral-800">
+      Quotient, the Game is an interactive fiction adventure (think classic Zork) set in the universe of the books.
+      You can play in your browser and explore Quotient HQ, fly the Quotient Jet, and more.
+    </p>
+
+    <div class="mt-7 flex flex-wrap gap-3">
+      <a class="rounded-xl bg-neutral-900 px-5 py-3 text-sm font-medium text-white" href="https://simpsong00.github.io" target="_blank" rel="noreferrer">
+        Play the game
+      </a>
+      <a class="rounded-xl border border-neutral-200 px-5 py-3 text-sm font-medium" href="https://intfiction.org/t/lets-play-quotient-the-game-by-gregory-simpson/75735/1" target="_blank" rel="noreferrer">
+        Watch the narrated playthrough
+      </a>
+    </div>
+
+    <div class="mt-10 rounded-2xl border border-neutral-200 bg-neutral-50 p-6 text-sm text-neutral-800">
+      <p class="font-semibold">New to interactive fiction?</p>
+      <p class="mt-2">Try commands like: <code>look</code>, <code>examine</code>, <code>take</code>, <code>inventory</code>, and directions like <code>north</code>/<code>south</code>.</p>
+    </div>
+  </div>
+</BaseLayout>
