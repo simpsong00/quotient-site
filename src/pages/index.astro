@@ -1,32 +1,35 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+// GitHub Pages–safe base URL helper
+const base = import.meta.env.BASE_URL;
+const u = (path) => base.replace(/\/$/, "") + path;
 ---
 
 <BaseLayout>
-<section class="mx-auto max-w-4xl py-20 text-center">
-  <h1 class="text-6xl font-semibold tracking-tight">
-    The Quotient Series
-  </h1>
+  <section class="mx-auto max-w-4xl py-20 text-center">
+    <h1 class="text-6xl font-semibold tracking-tight">
+      The Quotient Series
+    </h1>
 
-  <p class="mx-auto mt-6 max-w-2xl text-xl text-neutral-700">
-    Techno-thrillers where tomorrow’s technology collides with today’s world.
-  </p>
+    <p class="mx-auto mt-6 max-w-2xl text-xl text-neutral-700">
+      Techno-thrillers where tomorrow’s technology collides with today’s world.
+    </p>
 
-  <div class="mt-10 flex justify-center gap-4">
-    <a
-      class="rounded-xl bg-accent px-6 py-3 text-base font-medium text-white hover:bg-neutral-800"
-      href="/books"
-    >
-      Explore the books
-    </a>
-    <a
-      class="rounded-xl border bg-accent px-6 py-3 text-base font-medium text-white hover:bg-neutral-800"
-      href="/blog"
-    >
-      Read the blog
-    </a>
-  </div>
-</section>
+    <div class="mt-10 flex justify-center gap-4">
+      <a
+        class="rounded-xl bg-accent px-6 py-3 text-base font-medium text-white hover:opacity-90"
+        href={u("/books")}
+      >
+        Explore the books
+      </a>
+
+      <a
+        class="rounded-xl border border-accent px-6 py-3 text-base font-medium text-accent hover:bg-[#fff7ed]"
+        href={u("/blog")}
+      >
+        Read the blog
+      </a>
+    </div>
+  </section>
 </BaseLayout>
-
-
