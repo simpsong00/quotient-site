@@ -19,7 +19,7 @@ const posts = (await getCollection("blog"))
     <div class="mt-8 grid gap-6">
       {posts.map((p) => (
         <a
-          class="group block rounded-2xl border border-neutral-200 p-5 hover:bg-neutral-50"
+          class="group block rounded-2xl border border-neutral-200 p-5 hover:bg-accent"
           href={u(`/blog/${p.slug}`)}
         >
           <div class="text-sm text-neutral-600">
