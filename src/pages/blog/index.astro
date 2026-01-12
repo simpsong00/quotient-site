@@ -2,33 +2,57 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 
-const base = import.meta.env.BASE_URL;
-// Join base + path safely (works in dev and on /quotient-site/)
-const u = (path) => new URL(path.replace(/^\//, ""), base).pathname;
-
 const posts = (await getCollection("blog"))
   .filter((p) => !p.data.draft)
-  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+// If you want, you can set this in astro.config.mjs (recommended):
+// site: "https://simpsong00.github.io"
+const SITE = import.meta.env.SITE;
 ---
 
-<BaseLayout title="Blog" description="The Journey Blog">
-  <div class="mx-auto max-w-3xl">
-    <h1 class="text-4xl font-semibold tracking-tight">The Journey Blog</h1>
-    <p class="mt-3 text-neutral-700">Behind-the-scenes travel, research, locations, and updates from the Quotient universe.</p>
+<BaseLayout title="Blog">
+  <section class="mx-auto max-w-4xl px-6 py-12">
+    <h1 class="text-4xl font-semibold tracking-tight">Blog</h1>
+    <p class="mt-3 text-neutral-700">Updates, research notes, and behind-the-scenes posts.</p>
 
-    <div class="mt-8 grid gap-6">
-      {posts.map((p) => (
-        <a
-          class="group block rounded-2xl border border-neutral-200 p-5 hover:bg-accent"
-          href={u(`/blog/${p.slug}`)}
-        >
-          <div class="text-sm text-neutral-600">
-            {p.data.pubDate.toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" })}
+    <div class="mt-10 space-y-6">
+      {posts.map((post) => (
+        <article class="rounded-2xl border bg-white/60 p-6">
+          <h2 class="text-2xl font-semibold">
+            <a class="hover:underline" href={`/blog/${post.slug}/`}>
+              {post.data.title}
+            </a>
+          </h2>
+
+          <div class="mt-2 text-sm text-neutral-600">
+            {post.data.pubDate.toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
           </div>
-          <div class="mt-2 text-xl font-semibold group-hover:text-accent">{p.data.title}</div>
-          {p.data.description ? <p class="mt-2 text-neutral-700">{p.data.description}</p> : null}
-        </a>
+
+          {post.data.coverImage ? (
+            <img
+              class="mt-4 w-full rounded-xl border object-cover"
+              src={post.data.coverImage}
+              alt=""
+              loading="lazy"
+            />
+          ) : null}
+
+          {post.data.description ? (
+            <p class="mt-4 text-neutral-700">{post.data.description}</p>
+          ) : null}
+
+          <div class="mt-4">
+            <a class="text-accent hover:underline" href={`/blog/${post.slug}/`}>
+              Read →
+            </a>
+          </div>
+        </article>
       ))}
     </div>
-  </div>
+  </section>
 </BaseLayout>
